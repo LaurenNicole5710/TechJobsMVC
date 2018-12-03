@@ -43,6 +43,7 @@ textarea {
 
 td, th {
     padding: 10px;
+    text-transform: capitalize;
 }
 
 tr:nth-child(odd) {

@@ -1,6 +1,6 @@
 ﻿<h1>@ViewBag.title</h1>
 
-<form action="/Search/Results">
+<form action="/Search/Results" method="post">
     <h2>Search by:</h2>
 
     <p>
@@ -10,8 +10,8 @@
                 <input type="radio"
                        name="searchType"
                        id="@column.Key"
-                       value="@column.Key" 
-                       checked="@column.Key == 'all''"/>
+                       value="@column.Key"
+                       checked="@column.Key == '@column.Key''" />
                 <label for="@column.Key">@column.Value</label>
             </span>
         }
@@ -28,9 +28,34 @@
 <hr />
 
 @if (ViewBag.jobs != null)
-{
+ {
 
     <h3>@ViewBag.jobs.Count Result(s)</h3>
 
-    // TODO #2 - Loop over jobs dictionary and display all job fields 
-}
+    // TODO #2 - Loop over jobs dictionary and display all job fields
+
+
+@foreach (Dictionary<string, string> dict in ViewBag.jobs)
+    {
+    <table class="job-listing">
+       @foreach (KeyValuePair<string, string> item in dict)
+
+        {
+           <tr>
+           <th>@item.Key</th>
+
+               @if (@item.Key == "name")
+                    {
+                       <td>@item.Value</td>;
+                    }
+                else
+                    {
+                        <td><a asp-controller="List" asp-action="Jobs" asp-route-column="@item.Key" asp-route-value="@item.Value">@item.Value</a></td>;
+                    }
+           </tr>
+        }
+        
+    </table>
+
+    }
+ }
