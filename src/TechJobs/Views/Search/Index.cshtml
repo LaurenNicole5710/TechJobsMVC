@@ -1,5 +1,6 @@
 ﻿<h1>@ViewBag.title</h1>
 
+
 <form action="/Search/Results" method="post">
     <h2>Search by:</h2>
 
@@ -11,7 +12,7 @@
                        name="searchType"
                        id="@column.Key"
                        value="@column.Key"
-                       checked="@column.Key == '@column.Key''" />
+                       checked="@column.Key == 'all''" />
                 <label for="@column.Key">@column.Value</label>
             </span>
         }

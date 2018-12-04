@@ -21,12 +21,22 @@ namespace TechJobs.Controllers
         [HttpPost]
         public IActionResult Results(string searchType, string searchTerm)
         {
-            ViewBag.jobs = JobData.FindByValue(searchTerm);
-            ViewBag.columns = ListController.columnChoices;
-            ViewBag.title = "Search";
+            if (searchType == "all")
+            {
+                ViewBag.jobs = JobData.FindByValue(searchTerm);
+                ViewBag.columns = ListController.columnChoices;
+                ViewBag.title = "Search";
 
+
+            }
+
+            else if (searchType != "all")
+            {
+                ViewBag.jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
+                ViewBag.columns = ListController.columnChoices;
+                ViewBag.title = "Search";
+            }
             return View("Index");
         }
-
     }
 }
